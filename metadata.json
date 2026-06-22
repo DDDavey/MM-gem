@@ -1,0 +1,6 @@
+{
+  "name": "Maison Lithos - Fine Crystal & Precious Stone Accessories",
+  "description": "An exquisite, high-ticket boutique e-commerce storefront for bespoke fine jewelry, featuring ethically sourced crystals, GIA-certified precious stones, and rare metals. Powered by a live AI gemologist concierge.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
