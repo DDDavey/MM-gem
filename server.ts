@@ -10,15 +10,24 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Initialize Gemini SDK with User-Agent as instructed in skills
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  httpOptions: {
-    headers: {
-      "User-Agent": "aistudio-build",
-    },
-  },
-});
+let aiClient: GoogleGenAI | null = null;
+
+function getAI(): GoogleGenAI {
+  if (!aiClient) {
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error("GEMINI_API_KEY environment variable is missing.");
+    }
+    aiClient = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+      httpOptions: {
+        headers: {
+          "User-Agent": "aistudio-build",
+        },
+      },
+    });
+  }
+  return aiClient;
+}
 
 async function startServer() {
   const app = express();
@@ -56,7 +65,7 @@ ${JSON.stringify(currentData || {})}
 
       const promptText = `Generate the structured luxury e-commerce workbook JSON for the brand "${brandName}". Make sure it is deeply customized, rich with expert marketing and CRO strategies, and contains actual persuasive, high-end copywriting rather than placeholder text or lorem ipsum. Adapt the terminology professionally to their specific material and product categories (e.g., talk about crystal clarity, GIA certification, conflict-free diamonds, artisan faceting, polished platinum settings, energy and resonance of rare stones, heirloom investments, overnight insured secure vaults, etc).`;
 
-      const response = await ai.models.generateContent({
+      const response = await getAI().models.generateContent({
         model: "gemini-3.5-flash",
         contents: promptText,
         config: {
@@ -299,7 +308,7 @@ Key details you know and explain with reverence:
 
 Address the client's questions directly, with poetic grace and quiet luxury. Keep answers under 3 short paragraphs. Actively encourage them to try the customized atelier configurator on the page to design their bespoke commission.`;
 
-      const response = await ai.models.generateContent({
+      const response = await getAI().models.generateContent({
         model: "gemini-3.5-flash",
         contents: [
           ...formattedHistory,
