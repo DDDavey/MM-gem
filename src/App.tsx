@@ -38,22 +38,8 @@ export default function App() {
   ]);
   const [isAskingConcierge, setIsAskingConcierge] = useState(false);
 
-  // Exit Intent State
-  const [showExitIntent, setShowExitIntent] = useState(false);
   const [ledgerEmail, setLedgerEmail] = useState("");
   const [ledgerEnrolled, setLedgerEnrolled] = useState(false);
-
-  useEffect(() => {
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY < 30 && !ledgerEnrolled) {
-        setShowExitIntent(true);
-      }
-    };
-    document.addEventListener("mouseleave", handleMouseLeave);
-    return () => {
-      document.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, [ledgerEnrolled]);
 
   const handleAskConcierge = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -122,9 +108,6 @@ export default function App() {
     e.preventDefault();
     if (!ledgerEmail.trim()) return;
     setLedgerEnrolled(true);
-    setTimeout(() => {
-      setShowExitIntent(false);
-    }, 2000);
   };
 
   return (
@@ -448,70 +431,6 @@ export default function App() {
                   Answers powered by real-time Gemini AI. Securely guided by Gemological authorities.
                 </p>
               </form>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showExitIntent && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowExitIntent(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            />
-
-            <motion.div 
-              initial={{ y: 15, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 15, opacity: 0 }}
-              className="bg-white text-[#211d1a] border border-[#2b5876]/40 p-8 max-w-lg w-full relative z-10 shadow-2xl text-center space-y-6"
-            >
-              <button
-                onClick={() => setShowExitIntent(false)}
-                className="absolute top-4 right-4 text-stone-400 hover:text-stone-900 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="space-y-1.5">
-                <span className="font-serif text-[10px] text-[#2b5876] tracking-[0.25em] uppercase font-bold block">private ledger invitation</span>
-                <h3 className="font-serif text-2xl text-stone-900 leading-tight">Enroll in The Lapidary Annals</h3>
-                <p className="text-xs text-stone-500 leading-relaxed max-w-sm mx-auto font-serif italic">
-                  "Diamond cutting rotations are structurally restricted. Members receive first reservation slots and a $150 credit on their first bespoke order."
-                </p>
-              </div>
-
-              {!ledgerEnrolled ? (
-                <form onSubmit={handleEnrollLedger} className="space-y-3 max-w-sm mx-auto">
-                  <input
-                    type="email"
-                    required
-                    value={ledgerEmail}
-                    onChange={(e) => setLedgerEmail(e.target.value)}
-                    placeholder="Enter private email address"
-                    className="w-full p-2.5 bg-stone-50 border border-stone-250 text-xs outline-none focus:border-[#2b5876] text-center"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full py-2.5 bg-[#211d1a] text-white hover:bg-[#2b5876] font-bold cursor-pointer text-xs uppercase tracking-widest transition-all"
-                  >
-                    Acquire $150 Reservation Voucher
-                  </button>
-                </form>
-              ) : (
-                <div className="p-4 bg-[#faf6f1] border border-[#2b5876]/30 text-[#2b5876] font-mono text-xs text-center">
-                  <div className="text-[#2b5876] font-bold mb-1">✓ INVITATION ACCOUNT VERIFIED</div>
-                  Voucher coordinate dispatched. Check your inbox for our autumn ledger credentials.
-                </div>
-              )}
-
-              <p className="text-[9px] text-stone-400">
-                Spams are strictly rejected. Dossier protected by absolute atelier security.
-              </p>
             </motion.div>
           </div>
         )}

@@ -18,10 +18,10 @@ export function Header() {
 
   return (
     <>
-      <div className="bg-[#D4AF37] text-[#050505] py-2 px-4 text-[10px] tracking-[0.2em] uppercase font-bold text-center flex items-center justify-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#050505] animate-pulse"></span>
+      <div className="bg-[#0a0a0a] text-[#D4AF37] border-b border-white/5 py-2 px-4 text-[10px] tracking-[0.2em] uppercase font-bold text-center flex items-center justify-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse"></span>
         <span>The Antwerp Rough Cycle • 3 Rare Master Cuts Remaining Globally</span>
-        <button onClick={() => setIsCheckoutOpen(true)} className="border-b border-[#050505] hover:opacity-80 transition-opacity font-bold ml-1 cursor-pointer">
+        <button onClick={() => setIsCheckoutOpen(true)} className="border-b border-[#D4AF37] hover:opacity-80 transition-opacity font-bold ml-1 cursor-pointer">
           Secure Allocation
         </button>
       </div>
@@ -32,7 +32,7 @@ export function Header() {
           : "bg-transparent"
       }`}>
         <div className="max-w-[90rem] mx-auto px-8 py-8 flex flex-col items-center justify-center gap-2">
-          <Link to="/" className="font-serif text-3xl lg:text-4xl tracking-[0.3em] font-normal text-[#e4e4e7] hover:text-white transition-colors cursor-pointer select-none">
+          <Link to="/" className="font-serif text-3xl lg:text-4xl tracking-[0.3em] font-normal text-[#D4AF37] hover:opacity-80 transition-opacity cursor-pointer select-none">
             MAISON LITHOS
           </Link>
           <span className="text-[10px] tracking-[0.4em] text-[#8f8f9d] uppercase font-medium">

@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { ArrowRight, Fingerprint, ScanEye, Award, CheckCircle2 } from "lucide-react";
 
 export function Home() {
@@ -75,8 +75,18 @@ export function Home() {
       </section>
 
       {/* 2. CURATED COLLECTION (Bento Grid) */}
-      <section className="py-24 px-8 max-w-[100rem] mx-auto">
-        <motion.div 
+      <section 
+        className="py-32 px-8 relative"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.95)), url("https://images.unsplash.com/photo-1620127252536-0bea35581561?auto=format&fit=crop&q=80&w=2000")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          backgroundBlendMode: 'luminosity'
+        }}
+      >
+        <div className="max-w-[100rem] mx-auto relative z-10">
+          <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -131,23 +141,33 @@ export function Home() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* 3. CRAFTSMANSHIP STORY */}
-      <section className="py-24 px-8 bg-[#0a0a0a] border-t border-b border-white/5 relative overflow-hidden">
+      <section 
+        className="py-24 px-8 border-t border-b border-white/5 relative overflow-hidden"
+        style={{
+          backgroundImage: 'linear-gradient(to right, rgba(5,5,5,1) 0%, rgba(5,5,5,0.9) 50%, rgba(5,5,5,0.6) 100%), url("https://images.unsplash.com/photo-1589483232748-515c025504dc?auto=format&fit=crop&q=80&w=1600")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundBlendMode: 'luminosity'
+        }}
+      >
+        
         <div className="max-w-[70rem] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10 items-center">
           <div>
             <h2 className="font-serif text-3xl lg:text-4xl leading-tight mb-4 text-white">
               Absolute Purity.
             </h2>
-            <p className="font-sans text-[#8f8f9d] text-xs leading-relaxed max-w-sm">
+            <p className="font-sans text-[#8f8f9d] text-sm md:text-base leading-relaxed max-w-sm">
               We reject mass production. Every piece is an orchestration of ethical sourcing and generational craftsmanship. No compromise. Only the artifact.
             </p>
           </div>
           
-          <div className="space-y-6 lg:ml-auto">
+          <div className="space-y-4 lg:ml-auto w-full lg:w-auto">
             {["GIA Certified Clarity", "Conflict-Free Origins", "Generational Warranty"].map((item, i) => (
-              <div key={i} className="flex gap-4 items-center group">
+              <div key={i} className="flex gap-4 items-center group bg-[#050505]/40 backdrop-blur-md border border-white/5 p-4 rounded-xl">
                 <CheckCircle2 className="w-5 h-5 text-white/20 group-hover:text-[#D4AF37] transition-colors duration-[400ms]" />
                 <h4 className="font-serif text-lg text-[#e4e4e7]">{item}</h4>
               </div>
@@ -157,11 +177,15 @@ export function Home() {
       </section>
 
       {/* 4. VIP INQUIRY CTA */}
-      <section className="py-24 px-8 max-w-[40rem] mx-auto text-center">
-        <h2 className="font-serif text-3xl mb-4 text-white">Private Acquisitions</h2>
-        <p className="font-mono text-[9px] text-[#8f8f9d] uppercase tracking-[0.2em] mb-12">Formal request for unlisted designs.</p>
+      <section className="py-32 px-8 relative border-t border-white/5 overflow-hidden">
+        <img referrerPolicy="no-referrer" src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&q=80&w=1600" alt="Luxury Texture" className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-[#050505]/80"></div>
+        
+        <div className="max-w-[40rem] mx-auto text-center relative z-10">
+          <h2 className="font-serif text-3xl mb-4 text-white">Private Acquisitions</h2>
+          <p className="font-mono text-[9px] text-[#8f8f9d] uppercase tracking-[0.2em] mb-12">Formal request for unlisted designs.</p>
 
-        <form onSubmit={handleInquiry} className="text-left bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl backdrop-blur-3xl space-y-6">
+          <form onSubmit={handleInquiry} className="text-left bg-[#050505]/50 border border-white/10 p-8 rounded-2xl backdrop-blur-3xl space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <input 
@@ -228,6 +252,7 @@ export function Home() {
             <pre className="font-mono text-[10px] text-[#8f8f9d] whitespace-pre-wrap">{jsonOutput}</pre>
           </motion.div>
         )}
+        </div>
       </section>
     </div>
   );
